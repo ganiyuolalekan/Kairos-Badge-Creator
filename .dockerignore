@@ -1,0 +1,50 @@
+# Virtual environment
+venv/
+env/
+.env
+
+# Cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Logs
+*.log
+app.log
+
+# Development files
+setup.sh
+run.sh
+
+# Test files
+test_*.py
+
+# Documentation
+README.md
+DEPLOYMENT_GUIDE.md
+MEASUREMENTS.md
+
+# Generated images (optional - remove this line if you want to keep test images)
+generated/*.png
+uploads/*.jpg
+uploads/*.jpeg
+uploads/*.png
+
+# Test template (keep only actual template)
+templates_img/test_template.png
