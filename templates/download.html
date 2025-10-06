@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Your Kairos 2025 Badge</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .success-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            color: #D4AF37;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        .success-message {
+            color: #FFD700;
+            font-size: 1.2rem;
+        }
+        
+        .badge-preview {
+            background: rgba(26, 26, 26, 0.95);
+            border: 2px solid #D4AF37;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(212, 175, 55, 0.2);
+        }
+        
+        .badge-image {
+            max-width: 100%;
+            max-height: 500px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .download-section {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            padding: 18px 50px;
+            background: linear-gradient(45deg, #D4AF37, #FFD700);
+            color: #000;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5);
+        }
+        
+        .conference-info {
+            background: rgba(26, 26, 26, 0.95);
+            border: 1px solid #D4AF37;
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 40px;
+        }
+        
+        .conference-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .conference-logo {
+            max-width: 100%;
+            height: 200px;
+            object-fit: contain;
+            margin-bottom: 20px;
+        }
+        
+        h2 {
+            color: #D4AF37;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .conference-details {
+            color: #fff;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+        
+        .conference-details p {
+            margin-bottom: 15px;
+        }
+        
+        .highlight {
+            color: #D4AF37;
+            font-weight: bold;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .secondary-btn {
+            padding: 15px 30px;
+            background: transparent;
+            border: 2px solid #D4AF37;
+            color: #D4AF37;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        
+        .secondary-btn:hover {
+            background: #D4AF37;
+            color: #000;
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .badge-image {
+                max-height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="success-header">
+            <h1>Congratulations!</h1>
+            <p class="success-message">Your Kairos 2025 badge has been created</p>
+        </div>
+        
+        <div class="badge-preview">
+            <img src="/download_file/{{ filename }}" alt="Your Kairos Badge" class="badge-image" id="badgeImage">
+        </div>
+        
+        <div class="download-section">
+            <a href="/download_file/{{ filename }}" class="download-btn" download>Download Your Badge</a>
+        </div>
+        
+        <div class="conference-info">
+            <div class="conference-header">
+                <img src="/static/conference_banner.png" alt="Kairos 2025" class="conference-logo" 
+                     onerror="this.style.display='none'">
+                <h2>About Kairos 2025</h2>
+            </div>
+            
+            <div class="conference-details">
+                <p><span class="highlight">Theme:</span> KAIROS</p>
+                
+                <p><span class="highlight">Date:</span> Friday 24th - Sunday 26th October, 2025</p>
+                
+                <p><span class="highlight">Venue:</span> RCCG Praise Assembly, Karu Site, Corner Shop, Abuja</p>
+                
+                <p><span class="highlight">Schedule:</span></p>
+                <p>• Friday 24th: 5:30 PM - 7:30 PM</p>
+                <p>• Saturday 25th: 9:00 AM - 2:00 PM</p>
+                <p>• Sunday 26th: 7:30 AM & 9:00 AM</p>
+                
+                <p><span class="highlight">About the Conference:</span></p>
+                <p>Kairos 2025 is the 9th Annual Conference of The Issachar Generation (TIG), hosted by RCCG Praise Assembly. 
+                This year's theme, "Kairos," represents God's appointed time - a moment of divine opportunity and breakthrough.</p>
+                
+                <p>Join us for three power-packed days of worship, word, and transformation as we explore what it means to 
+                recognize and seize God's appointed time in our lives. Experience powerful ministrations from anointed speakers, 
+                life-changing worship sessions, and divine encounters that will propel you into your season of manifestation.</p>
+                
+                <p><span class="highlight">Featured Speakers:</span> Dr. Levin Damisan, Mrs. Olugbesoye Olujimi, Min. Esther Orji, 
+                Pastor O Jacob, Pastor (Mrs) Temitope Onuegbu, Min. Leke Gospel, and Apostle Jonathan Shekwonya</p>
+                
+                <p><span class="highlight">Don't miss this divine appointment!</span> Share your badge on social media with 
+                #Kairos2025 #IGC2025 #IWillBeThere</p>
+            </div>
+            
+            <div class="action-buttons">
+                <a href="/form" class="secondary-btn">Create Another Badge</a>
+                <a href="/" class="secondary-btn">Back to Home</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
