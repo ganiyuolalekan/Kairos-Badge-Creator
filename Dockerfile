@@ -4,8 +4,14 @@ FROM python:3.11-slim
 # Set working directory
 WORKDIR /app
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
+# Set environment variables early
+ENV PYTHONUNBUFFERED=1
+ENV FLASK_APP=app.py
+ENV FLASK_ENV=production
+ENV PORT=8080
+
+# Install system dependencies (suppress warnings)
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
     gcc \
     libjpeg-dev \
     zlib1g-dev \
@@ -18,27 +24,40 @@ RUN apt-get update && apt-get install -y \
     libharfbuzz-dev \
     libfribidi-dev \
     libxcb1-dev \
-    && rm -rf /var/lib/apt/lists/*
+    curl \
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get clean
+
+# Upgrade pip to suppress warnings
+RUN pip install --upgrade pip
 
 # Copy requirements first for better caching
 COPY requirements.txt .
 
-# Install Python dependencies
+# Install Python dependencies (create virtual environment to avoid root warnings)
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy application code
 COPY . .
 
-# Create necessary directories
-RUN mkdir -p uploads generated templates_img static
+# Create necessary directories with proper permissions
+RUN mkdir -p uploads generated templates_img static && \
+    chmod 755 uploads generated templates_img static
 
-# Set environment variables
-ENV FLASK_APP=app.py
-ENV FLASK_ENV=production
-ENV PYTHONPATH=/app
+# Create a non-root user for better security
+RUN useradd --create-home --shell /bin/bash app && \
+    chown -R app:app /app
+USER app
 
-# Expose port
-EXPOSE 8080
+# Expose port (this will be overridden by PORT env var)
+EXPOSE $PORT
 
-# Run the application with gunicorn
-CMD ["gunicorn", "--bind", "0.0.0.0:8080", "--workers", "2", "--timeout", "120", "app:app"]
+# Health check
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:$PORT/ || exit 1
+
+# Make startup script executable
+RUN chmod +x /app/start.sh
+
+# Run the application
+CMD ["/app/start.sh"]

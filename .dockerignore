@@ -37,8 +37,6 @@ test_*.py
 
 # Documentation
 README.md
-DEPLOYMENT_GUIDE.md
-MEASUREMENTS.md
 
 # Generated images (optional - remove this line if you want to keep test images)
 generated/*.png
