@@ -102,23 +102,55 @@ def process_image(user_image_path, first_name, last_name, unique_id):
     circle_center = (562, 925)  # Center of the circle in the template
     circle_radius = 288  # Radius of the circle
     
-    # Resize user image to fit the circle
-    user_image = user_image.resize((circle_radius * 2, circle_radius * 2), Image.Resampling.LANCZOS)
+    # Get original image dimensions
+    original_width, original_height = user_image.size
     
-    # Create circular mask
-    mask = Image.new('L', (circle_radius * 2, circle_radius * 2), 0)
-    draw = ImageDraw.Draw(mask)
-    draw.ellipse((0, 0, circle_radius * 2, circle_radius * 2), fill=255)
+    # Calculate the size needed for a perfect square crop (to avoid skewing)
+    crop_size = min(original_width, original_height)
     
-    # Apply circular mask
-    user_image_circular = Image.new('RGBA', (circle_radius * 2, circle_radius * 2), (0, 0, 0, 0))
-    user_image_circular.paste(user_image, (0, 0))
+    # Calculate crop coordinates to center the square crop
+    left = (original_width - crop_size) // 2
+    top = (original_height - crop_size) // 2
+    right = left + crop_size
+    bottom = top + crop_size
+    
+    # Crop to square first to maintain aspect ratio
+    user_image_square = user_image.crop((left, top, right, bottom))
+    
+    # Now resize the square image to fit the circle (maintains perfect circle)
+    target_size = circle_radius * 2
+    user_image_resized = user_image_square.resize((target_size, target_size), Image.Resampling.LANCZOS)
+    
+    # Create high-quality circular mask with anti-aliasing
+    mask = Image.new('L', (target_size, target_size), 0)
+    draw_mask = ImageDraw.Draw(mask)
+    
+    # Draw circle with slight inset for smoother edges
+    margin = 1
+    draw_mask.ellipse((margin, margin, target_size - margin, target_size - margin), fill=255)
+    
+    # Apply Gaussian blur to mask for smoother edges
+    from PIL import ImageFilter
+    mask = mask.filter(ImageFilter.GaussianBlur(radius=0.5))
+    
+    # Create the circular image with proper alpha channel
+    user_image_circular = Image.new('RGBA', (target_size, target_size), (0, 0, 0, 0))
+    
+    # Convert to RGBA if not already
+    if user_image_resized.mode != 'RGBA':
+        user_image_resized = user_image_resized.convert('RGBA')
+    
+    # Paste the resized image
+    user_image_circular.paste(user_image_resized, (0, 0))
+    
+    # Apply the smooth circular mask
     user_image_circular.putalpha(mask)
     
-    # Paste the circular user image onto the template
-    result.paste(user_image_circular, 
-                (circle_center[0] - circle_radius, circle_center[1] - circle_radius),
-                user_image_circular)
+    # Paste the circular user image onto the template with proper positioning
+    paste_x = circle_center[0] - circle_radius
+    paste_y = circle_center[1] - circle_radius
+    
+    result.paste(user_image_circular, (paste_x, paste_y), user_image_circular)
     
     # Add text (name) to the image
     draw = ImageDraw.Draw(result)
@@ -126,7 +158,8 @@ def process_image(user_image_path, first_name, last_name, unique_id):
     # Try to load a nice font, fallback to default if not available
     try:
         # You may need to adjust the font path based on your system
-        font_size = 100  # Scaled for 1080x1920 template
+        # font_size = 100  # Scaled for 1080x1920 template
+        font_size = 600
         font = ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", font_size)
     except:
         font = ImageFont.load_default()
