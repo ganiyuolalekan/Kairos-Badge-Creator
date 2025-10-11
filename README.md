@@ -79,6 +79,8 @@ generate_image_template/
 │   └── download.html    # Download page
 ├── templates_img/       # Image templates (create this)
 │   └── kairos_template.png  # Add your template here
+├── fonts/               # Bundled fonts for consistent rendering
+│   └── Arial.ttf        # Arial font for text rendering
 ├── uploads/             # User uploaded images (auto-created)
 ├── generated/           # Generated badges (auto-created)
 ├── requirements.txt     # Python dependencies
@@ -161,9 +163,9 @@ For production deployment:
 - The app will create a placeholder if template is missing
 
 ### Font Issues
-- The app tries to use system fonts
-- Falls back to default if fonts aren't available
-- For production, include custom fonts
+- The app now includes a bundled Arial font to ensure consistent text rendering
+- Falls back to system fonts if bundled font is not available
+- Falls back to default font only as a last resort
 
 ### Image Processing Issues
 - Ensure uploaded images are in supported formats (PNG, JPG, JPEG)

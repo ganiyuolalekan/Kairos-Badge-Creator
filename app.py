@@ -157,11 +157,25 @@ def process_image(user_image_path, first_name, last_name, unique_id):
     
     # Try to load a nice font, fallback to default if not available
     try:
-        # You may need to adjust the font path based on your system
         font_size = 100  # Scaled for 1080x1920 template
-        font = ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", font_size)
-    except:
-        font_size = 100
+        
+        # First try bundled font
+        bundled_font_path = os.path.join(os.path.dirname(__file__), 'fonts', 'Arial.ttf')
+        if os.path.exists(bundled_font_path):
+            font = ImageFont.truetype(bundled_font_path, font_size)
+            print(f"✅ Successfully loaded bundled Arial font from {bundled_font_path}")
+        # Fallback to system fonts
+        elif os.path.exists("/System/Library/Fonts/Helvetica.ttc"):  # macOS
+            font = ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", font_size)
+            print("✅ Successfully loaded system Helvetica font")
+        elif os.path.exists("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"):  # Linux
+            font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", font_size)
+            print("✅ Successfully loaded system DejaVuSans font")
+        else:
+            raise IOError("No suitable font found")
+    except Exception as e:
+        print(f"❌ Font loading failed: {e}")
+        print("⚠️ Using default font (this will be tiny!)")
         font = ImageFont.load_default()
     
     # Text position (adjust based on your template)
@@ -206,9 +220,21 @@ def create_placeholder_template(template_path):
     
     # Add title text
     try:
-        title_font = ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", 120)
-        subtitle_font = ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", 52)
-    except:
+        # First try bundled font
+        bundled_font_path = os.path.join(os.path.dirname(__file__), 'fonts', 'Arial.ttf')
+        if os.path.exists(bundled_font_path):
+            title_font = ImageFont.truetype(bundled_font_path, 120)
+            subtitle_font = ImageFont.truetype(bundled_font_path, 52)
+            print(f"✅ Template: Successfully loaded bundled Arial font")
+        # Fallback to system fonts
+        elif os.path.exists("/System/Library/Fonts/Helvetica.ttc"):  # macOS
+            title_font = ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", 120)
+            subtitle_font = ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", 52)
+            print("✅ Template: Successfully loaded system Helvetica font")
+        else:
+            raise IOError("No suitable font found for template")
+    except Exception as e:
+        print(f"❌ Template font loading failed: {e}")
         title_font = ImageFont.load_default()
         subtitle_font = ImageFont.load_default()
     
