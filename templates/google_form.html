@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kairos 2025 - Registration Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #D4AF37;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        h2 {
+            color: #D4AF37;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        .subtitle {
+            color: #B8860B;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .form-container {
+            background: rgba(26, 26, 26, 0.95);
+            border: 2px solid #D4AF37;
+            border-radius: 20px;
+            padding: 20px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(212, 175, 55, 0.2);
+            animation: fadeIn 1s ease-out;
+            margin-bottom: 20px;
+        }
+        
+        .form-iframe {
+            width: 100%;
+            height: 800px;
+            border: none;
+            overflow-y: auto;
+            background: transparent;
+        }
+        
+        .next-step {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .next-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(45deg, #D4AF37, #FFD700);
+            color: #000;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 50px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+            margin-top: 20px;
+        }
+        
+        .next-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5);
+        }
+        
+        .back-link {
+            display: inline-block;
+            color: #D4AF37;
+            text-decoration: none;
+            margin-bottom: 20px;
+            transition: color 0.3s ease;
+        }
+        
+        .back-link:hover {
+            color: #FFD700;
+        }
+        
+        .instructions {
+            color: #ffffff;
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            max-width: 800px;
+            width: 100%;
+        }
+        
+        .instructions p {
+            margin-bottom: 10px;
+        }
+        
+        .instructions strong {
+            color: #D4AF37;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="/" class="back-link">← Back to Home</a>
+        <h2>Register for Kairos 2025</h2>
+        <div class="subtitle">Complete the registration form below</div>
+    </div>
+    
+    <div class="instructions">
+        <p><strong>Step 1:</strong> Fill out the Google Form below completely</p>
+        <p><strong>Step 2:</strong> After submitting the form, click "Create My Badge" below</p>
+        <p><strong>Step 3:</strong> Upload your photo and generate your personalized conference badge</p>
+    </div>
+    
+    <div class="form-container">
+        <iframe class="form-iframe" src="https://forms.gle/3tXJApsmkwj9DfZS8" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+    </div>
+    
+    <div class="next-step">
+        <p style="color: #D4AF37; margin-bottom: 10px;">After submitting the form above, continue to create your badge:</p>
+        <a href="/form" class="next-btn">Create My Badge</a>
+    </div>
+    
+    <script>
+        // You can add JavaScript here if needed
+        // For example, to detect when the form is submitted
+    </script>
+</body>
+</html>

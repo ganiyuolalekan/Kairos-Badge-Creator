@@ -5,7 +5,7 @@ A web application that generates personalized conference badges for Kairos 2025 
 ## Features
 
 - ✨ Beautiful landing page with gold-themed animations
-- 📝 Simple registration form
+- 📝 Google Form integration for event registration
 - 🖼️ Automatic badge generation with user's photo and name
 - 💾 Download personalized badge
 - 📱 Fully responsive design
@@ -75,7 +75,8 @@ generate_image_template/
 ├── app.py                 # Main Flask application
 ├── templates/            # HTML templates
 │   ├── index.html       # Landing page
-│   ├── form.html        # Registration form
+│   ├── google_form.html # Google Form integration page
+│   ├── form.html        # Badge creation form
 │   └── download.html    # Download page
 ├── templates_img/       # Image templates (create this)
 │   └── kairos_template.png  # Add your template here

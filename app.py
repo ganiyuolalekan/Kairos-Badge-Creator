@@ -33,6 +33,10 @@ def allowed_file(filename):
 def index():
     return render_template('index.html')
 
+@app.route('/register')
+def register():
+    return render_template('google_form.html')
+
 @app.route('/form')
 def form():
     return render_template('form.html')
