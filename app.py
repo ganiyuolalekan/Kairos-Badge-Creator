@@ -158,10 +158,10 @@ def process_image(user_image_path, first_name, last_name, unique_id):
     # Try to load a nice font, fallback to default if not available
     try:
         # You may need to adjust the font path based on your system
-        # font_size = 100  # Scaled for 1080x1920 template
-        font_size = 600
+        font_size = 100  # Scaled for 1080x1920 template
         font = ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", font_size)
     except:
+        font_size = 100
         font = ImageFont.load_default()
     
     # Text position (adjust based on your template)
